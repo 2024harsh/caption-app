@@ -1,5 +1,12 @@
 from fastapi import FastAPI, UploadFile, File, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import StreamingResponse
+import io
+import requests
+
+from backend.config import SPEECH_API_KEY, SPEECH_API_URL
+from backend.audio_utils import validate_audio
+
 
 app = FastAPI()
 
@@ -9,7 +16,7 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-#210929b500533cfb23309dd1158d2d1cb52bd587
+
 @app.get("/health")
 def health():
     return {"status": "ok"}
@@ -33,7 +40,7 @@ def enhance_audio(audio: UploadFile = File(...)):
     if response.status_code != 200:
         raise HTTPException(status_code=502, detail="Enhancement failed")
 
-    return Response(
-        content=response.content,
+    return StreamingResponse(
+        io.BytesIO(response.content),
         media_type="audio/wav"
     )

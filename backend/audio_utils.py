@@ -1,5 +1,6 @@
 from fastapi import HTTPException
-from config import MAX_AUDIO_MB, ALLOWED_TYPES
+from backend.config import MAX_AUDIO_MB, ALLOWED_TYPES
+
 
 
 def validate_audio(file):
