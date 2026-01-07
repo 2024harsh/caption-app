@@ -5,7 +5,7 @@ const API_BASE = "https://caption-app-v6s8.onrender.com";
 
 const audioInput = document.getElementById("audioInput");
 const enhanceBtn = document.getElementById("enhanceBtn");
-const statusl = document.getElementById("status");
+const statusEl = document.getElementById("status");
 
 const originalAudio = document.getElementById("originalAudio");
 const enhancedAudio = document.getElementById("enhancedAudio");
