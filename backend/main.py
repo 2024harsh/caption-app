@@ -16,12 +16,24 @@ def health():
 
 @app.post("/enhance")
 def enhance_audio(audio: UploadFile = File(...)):
-    # TEMP: just confirm upload works
-    if not audio.content_type.startswith("audio/"):
-        raise HTTPException(status_code=400, detail="Not an audio file")
+    validate_audio(audio)
 
-    return {
-        "filename": audio.filename,
-        "content_type": audio.content_type
+    headers = {
+        "Authorization": f"Token {SPEECH_API_KEY}",
+        "Content-Type": audio.content_type,
     }
 
+    response = requests.post(
+        SPEECH_API_URL,
+        headers=headers,
+        data=audio.file.read(),
+        timeout=90
+    )
+
+    if response.status_code != 200:
+        raise HTTPException(status_code=502, detail="Enhancement failed")
+
+    return Response(
+        content=response.content,
+        media_type="audio/wav"
+    )
