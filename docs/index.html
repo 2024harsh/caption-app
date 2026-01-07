@@ -2,52 +2,40 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <title>AI Speech Enhancer</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Doctype Harsh | Caption App</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <header class="navbar">
-    <div class="logo">&lt;doctype.harsh&gt;</div>
-    <nav>
-      <a href="#features">Features</a>
-      <a href="#status">API</a>
-      <a href="#contact">Contact</a>
-    </nav>
+  <header>
+    <h1>AI Speech Enhancer</h1>
+    <p>Upload audio → Enhance → Download</p>
   </header>
 
-  <section class="hero">
-    <h1>AI Caption Generator</h1>
-    <p>Frontend on GitHub Pages • Backend on Render</p>
-    <button onclick="checkAPI()">Check Backend Status</button>
-  </section>
-
-  <section id="status" class="status">
-    <h2>Backend API Status</h2>
-    <p id="apiStatus">Not checked</p>
-  </section>
-  
-  <section id="features" class="features">
+  <main>
     <div class="card">
-      <h3>⚡ Fast</h3>
-      <p>Minimal FastAPI backend.</p>
-    </div>
-    <div class="card">
-      <h3>🧠 Scalable</h3>
-      <p>ML features added later safely.</p>
-    </div>
-    <div class="card">
-      <h3>🔐 Clean</h3>
-      <p>Strict frontend–backend separation.</p>
-    </div>
-  </section>
 
+      <input type="file" id="audioInput" accept="audio/*" />
+      <button id="enhanceBtn">Enhance Audio</button>
 
+      <div id="status" class="status"></div>
 
-  <footer id="contact">
-    <p>Built by Harsh • © 2026</p>
-  </footer>
+      <div class="players">
+        <div>
+          <h3>Original</h3>
+          <audio id="originalAudio" controls></audio>
+        </div>
+
+        <div>
+          <h3>Enhanced</h3>
+          <audio id="enhancedAudio" controls></audio>
+          <a id="downloadLink" download="enhanced.wav">Download Enhanced Audio</a>
+        </div>
+      </div>
+
+    </div>
+  </main>
 
   <script src="script.js"></script>
 </body>

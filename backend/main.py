@@ -1,21 +1,27 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, UploadFile, File, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 
-# 🔥 ADD THIS BLOCK
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # allow all for now
-    allow_credentials=True,
+    allow_origins=["*"],
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-@app.get("/")
-def root():
-    return {"status": "Backend live, stable, minimal"}
-
+#210929b500533cfb23309dd1158d2d1cb52bd587
 @app.get("/health")
 def health():
     return {"status": "ok"}
+
+@app.post("/enhance")
+def enhance_audio(audio: UploadFile = File(...)):
+    # TEMP: just confirm upload works
+    if not audio.content_type.startswith("audio/"):
+        raise HTTPException(status_code=400, detail="Not an audio file")
+
+    return {
+        "filename": audio.filename,
+        "content_type": audio.content_type
+    }
+
