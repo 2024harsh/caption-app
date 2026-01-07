@@ -6,8 +6,12 @@ ALLOWED_TYPES = {
     "audio/wav",
     "audio/x-wav",
     "audio/mpeg",
-    "audio/mp3"
+    "audio/mp3",
+    "audio/mp4",      # m4a
+    "audio/webm",     # webm
+    "audio/ogg"       # ogg
 }
+
 
 # ===== Deepgram Speech Enhancement =====
 SPEECH_API_URL = os.getenv("SPEECH_API_URL")
