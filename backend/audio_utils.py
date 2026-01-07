@@ -5,11 +5,12 @@ from backend.config import MAX_AUDIO_MB, ALLOWED_TYPES
 
 def validate_audio(file):
     # ---- type check ----
-    if file.content_type not in ALLOWED_TYPES:
+    if not file.content_type or not file.content_type.startswith("audio/"):
         raise HTTPException(
             status_code=400,
-            detail="Unsupported audio format"
+            detail=f"Unsupported audio format: {file.content_type}"
         )
+
 
     # ---- size check ----
     file.file.seek(0, 2)  # move pointer to end
